@@ -56,8 +56,6 @@ export function Hero({ onScrollToProjects, onScrollToContact }: HeroProps) {
           poster="/images/projects/hero-fallback.jpeg"
         >
           <source src="/media/hero-boomerang.mp4" type="video/mp4" />
-          <source src="/media/hero.mp4" type="video/mp4" />
-          <source src="/media/hero.MOV" type="video/quicktime" />
         </video>
       ) : (
         <div className="fixed inset-0 -z-10">
