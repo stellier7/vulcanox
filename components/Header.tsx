@@ -3,6 +3,8 @@
 import Link from 'next/link';
 
 export function Header() {
+  console.log('[VULCANOX] Header rendering');
+  
   return (
     <header>
       <div className="container-edge py-4">

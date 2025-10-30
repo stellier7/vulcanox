@@ -14,12 +14,13 @@ import { AboutScroller } from '@/components/AboutScroller';
 // Removed animated About intro to disable slide animation
 
 export default function HomePage() {
+  console.log('[VULCANOX] HomePage rendering');
+  
   const projectsRef = useRef<HTMLDivElement | null>(null);
   const [revealCard, setRevealCard] = useState(false);
   const contactRef = useRef<HTMLDivElement | null>(null);
 
   // Reveal is controlled exclusively by SignatureSlide (liftStart) to avoid early appearance on mobile
-
 
   const scrollTo = (ref: React.RefObject<HTMLDivElement | null>) => {
     if (ref.current) ref.current.scrollIntoView({ behavior: 'smooth' });

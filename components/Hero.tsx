@@ -11,9 +11,12 @@ type HeroProps = {
 };
 
 export function Hero({ onScrollToProjects, onScrollToContact }: HeroProps) {
+  console.log('[VULCANOX] Hero rendering');
+  
   const [prefersReduced, setPrefersReduced] = useState(false);
   const videoRef = useRef<HTMLVideoElement | null>(null);
   useEffect(() => {
+    console.log('[VULCANOX] Hero useEffect - setting up media query');
     if (typeof window === 'undefined') return;
     const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
     const update = () => setPrefersReduced(mq.matches);

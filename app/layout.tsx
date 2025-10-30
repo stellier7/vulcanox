@@ -13,6 +13,9 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  console.log('[VULCANOX] RootLayout rendering');
+  console.log('[VULCANOX] Font variables:', { inter: inter.variable, playfair: playfair.variable });
+  
   return (
     <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
       <body className="font-sans antialiased">
