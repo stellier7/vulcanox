@@ -76,9 +76,13 @@ export function SignatureSlide({ onReveal, onHide }: Props) {
               // Begin lift a bit later as well to maintain full-black feel
               scrollTrigger: { trigger: el, start: 'top 60%', end: 'bottom top', scrub: true }
             });
-            const st2 = ScrollTrigger.create({ trigger: el, start: 'top 60%', end: 'bottom top' });
-            st2.eventCallback('onEnter', () => onReveal && onReveal());
-            st2.eventCallback('onLeaveBack', () => onHide && onHide());
+            ScrollTrigger.create({
+              trigger: el,
+              start: 'top 60%',
+              end: 'bottom top',
+              onEnter: () => onReveal && onReveal(),
+              onLeaveBack: () => onHide && onHide()
+            });
             
           }
         }
