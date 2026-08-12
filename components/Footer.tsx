@@ -1,5 +1,3 @@
-import Link from 'next/link';
-
 export function Footer() {
   const year = new Date().getFullYear();
 
@@ -11,9 +9,9 @@ export function Footer() {
         </div>
         <div className="foot-credit">
           Desarrollado por{' '}
-          <Link href="https://iagodigital.vercel.app" target="_blank" rel="noopener noreferrer">
+          <a href="https://iagodigital.vercel.app" target="_blank" rel="noopener">
             IAGO Digital
-          </Link>
+          </a>
         </div>
       </div>
     </footer>
