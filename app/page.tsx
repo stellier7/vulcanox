@@ -27,18 +27,17 @@ export default function HomePage() {
   };
 
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen overflow-x-hidden">
       <Hero
         onScrollToProjects={() => scrollTo(projectsRef)}
         onScrollToContact={() => scrollTo(contactRef)}
       />
 
       {/* Content wrapper above the video; solid bg prevents any bleed-through */}
-      <div className="relative z-10 bg-charcoal">
-        {/* Slide 2 & 3 unified: emit reveal at end */}
+      <div className="relative z-10 overflow-x-hidden bg-charcoal">
+        {/* Signature headline, then project card — stacked cleanly, no overlap */}
         <SignatureSlide onReveal={() => setRevealCard(true)} onHide={() => setRevealCard(false)} />
 
-        {/* Slide 4: card block rendered after slide (we'll keep tight spacing) */}
         <ShowcaseFade reveal={revealCard} containerRef={projectsRef} />
 
         {/* About section: image + headline + text scrolling in as a unit */}

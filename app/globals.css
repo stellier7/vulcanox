@@ -9,11 +9,14 @@
 
 html, body {
   height: 100%;
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 body {
   background-color: var(--bg);
   color: rgb(var(--fg));
+  position: relative;
 }
 
 .container-edge {

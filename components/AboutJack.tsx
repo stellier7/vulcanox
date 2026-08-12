@@ -10,37 +10,37 @@ export function AboutJack() {
         {/* Mobile-only headline above the image */}
         <div className="md:hidden">
           <motion.h3
-            initial={{ opacity: 0, x: 80 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: false, margin: '-100px' }}
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-80px' }}
             transition={{ duration: 0.6 }}
-            className="font-serif text-3xl text-center"
+            className="text-center font-serif text-3xl"
           >
             Leadership Shapes Results.
           </motion.h3>
         </div>
 
         <div
-          className="about-image relative w-full h-[60vh] lg:h-[70vh] rounded-2xl overflow-hidden bg-white/5 border border-white/10"
+          className="about-image relative h-[60vh] w-full overflow-hidden rounded-2xl border border-white/10 bg-white/5 lg:h-[70vh]"
         >
           <Image src="/images/jack.jpeg" alt="Jack A. Agurcia" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
         </div>
-        <div>
+        <div className="min-w-0">
           <motion.h3
-            initial={{ opacity: 0, x: 80 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: false, margin: '-100px' }}
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-80px' }}
             transition={{ duration: 0.6 }}
-            className="hidden md:block font-serif text-3xl md:text-5xl text-left lg:ml-8 about-text"
+            className="about-text hidden text-left font-serif text-3xl md:block md:text-5xl lg:ml-8"
           >
             Leadership Shapes Results.
           </motion.h3>
           <motion.div
-            initial={{ opacity: 0, x: 80 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: false, margin: '-100px' }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="mt-6 space-y-4 text-white/80 about-text"
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-80px' }}
+            transition={{ duration: 0.6, delay: 0.15 }}
+            className="about-text mt-6 space-y-4 text-white/80"
           >
             <p>
               Jack A. Agurcia is a licensed General Contractor and strategic real estate investor. Over the

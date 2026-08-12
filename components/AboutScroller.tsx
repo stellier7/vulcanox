@@ -74,8 +74,8 @@ export function AboutScroller() {
         tl.fromTo(track, { opacity: 0 }, { opacity: 1, ease: 'none', duration: 1 })
           .fromTo(
             track.querySelectorAll('.about-text'),
-            { x: 80, opacity: 0 },
-            { x: 0, opacity: 1, ease: 'none', duration: 1 },
+            { y: 28, opacity: 0 },
+            { y: 0, opacity: 1, ease: 'none', duration: 1 },
             0.1
           );
       }
@@ -84,22 +84,22 @@ export function AboutScroller() {
   }, [isMobile]);
 
   return (
-    <section ref={sectionRef} className="relative w-full bg-charcoal">
+    <section ref={sectionRef} className="relative w-full overflow-x-hidden bg-charcoal">
       {/* Overlay solo en desktop; en móvil lo ocultamos para no tapar el contenido */}
-      <div ref={overlayRef} className="absolute inset-0 bg-charcoal pointer-events-none hidden md:block" />
+      <div ref={overlayRef} className="pointer-events-none absolute inset-0 hidden bg-charcoal md:block" />
       {isMobile ? (
-        <div className="container-edge py-0">
+        <div className="overflow-x-hidden py-0">
           <motion.div
-            initial={{ x: 80, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            viewport={{ amount: 0.4, once: false }}
+            initial={{ y: 24, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ amount: 0.35, once: true }}
             transition={{ duration: 0.6, ease: 'easeOut' }}
           >
             <AboutJack />
           </motion.div>
         </div>
       ) : (
-        <div ref={trackRef} className="container-edge py-0 will-change-transform relative">
+        <div ref={trackRef} className="relative overflow-x-hidden py-0 will-change-transform">
           <AboutJack />
         </div>
       )}

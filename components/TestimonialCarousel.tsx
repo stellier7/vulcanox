@@ -29,7 +29,10 @@ export function TestimonialCarousel() {
           </blockquote>
           <div className="mt-4 text-white/70">— Norma Suarez</div>
         </div>
-        <motion.div animate={controls} className="relative h-[40vh] w-full rounded-2xl overflow-hidden bg-white/5 border border-white/10">
+        <motion.div
+          animate={controls}
+          className="relative h-[40vh] w-full max-w-full overflow-hidden rounded-2xl border border-white/10 bg-white/5"
+        >
           <Image src="/images/normaSuarez.png" alt="Norma Suarez property" fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover" />
         </motion.div>
       </div>

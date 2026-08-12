@@ -43,47 +43,50 @@ export function SignatureSlide({ onReveal, onHide }: Props) {
               scrollTrigger: {
                 trigger: el,
                 start: 'top top',
-                end: '+=420',
+                end: '+=320',
                 scrub: true,
                 pin: true,
                 anticipatePin: 1,
-                pinSpacing: false,
-                onEnter: () => { onHide && onHide(); },
-                onLeaveBack: () => { onHide && onHide(); }
+                pinSpacing: true,
+                onEnter: () => {
+                  onHide && onHide();
+                },
+                onLeaveBack: () => {
+                  onHide && onHide();
+                },
+                onLeave: () => {
+                  onReveal && onReveal();
+                }
               }
             });
-            const lift = 140;
-            // Slide 2: headline slides in from the left to center
-            tl.fromTo(h, { x: -160, opacity: 0 }, { x: 0, opacity: 1, ease: 'power2.out' })
-              // Slide 3: half-speed lift to title position
-              .add('liftStart', 0.45)
-              .to(h, { y: -lift, ease: 'none' }, 'liftStart')
-              // Start card reveal as soon as lift begins for a smooth fade
-              .add(() => { onReveal && onReveal(); }, 'liftStart');
+            // Headline slides in cleanly — no upward lift into the next section
+            tl.fromTo(
+              h,
+              { xPercent: -8, opacity: 0 },
+              { xPercent: 0, opacity: 1, ease: 'power2.out' }
+            ).add(() => {
+              onReveal && onReveal();
+            }, 0.65);
           } else {
-            // mobile: explicit scrubbed slide-in from off-screen, then slight lift
-            gsap.set(h, { x: -120, opacity: 0 });
+            gsap.set(h, { xPercent: -6, opacity: 0 });
             gsap.to(h, {
-              x: 0,
+              xPercent: 0,
               opacity: 1,
               ease: 'power2.out',
-              // Start later on mobile: when the slide is almost fully covering (top reaches bottom -> 100%)
-              scrollTrigger: { trigger: el, start: 'top 100%', end: 'top 70%', scrub: true }
-            });
-            gsap.to(h, {
-              y: -80,
-              ease: 'none',
-              // Begin lift a bit later as well to maintain full-black feel
-              scrollTrigger: { trigger: el, start: 'top 60%', end: 'bottom top', scrub: true }
+              scrollTrigger: {
+                trigger: el,
+                start: 'top 90%',
+                end: 'top 55%',
+                scrub: true
+              }
             });
             ScrollTrigger.create({
               trigger: el,
-              start: 'top 60%',
+              start: 'top 55%',
               end: 'bottom top',
               onEnter: () => onReveal && onReveal(),
               onLeaveBack: () => onHide && onHide()
             });
-            
           }
         }
       );
@@ -96,27 +99,27 @@ export function SignatureSlide({ onReveal, onHide }: Props) {
   }, []);
 
   return (
-    <section ref={sectionRef as any} className="relative w-full bg-charcoal">
-      <div className="container-edge min-h-[65svh] md:min-h-[90svh] flex items-center justify-center py-0">
+    <section ref={sectionRef as any} className="relative w-full overflow-x-hidden bg-charcoal">
+      <div className="container-edge flex min-h-[55svh] items-center justify-center py-16 md:min-h-[75svh] md:py-24">
         {isMobile ? (
           <motion.h2
-            className="font-serif text-2xl md:text-4xl lg:text-5xl max-w-5xl text-center my-0"
-            initial={{ x: -120, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            viewport={{ amount: 0.6, once: false }}
+            className="my-0 max-w-5xl text-center font-serif text-2xl md:text-4xl lg:text-5xl"
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ amount: 0.55, once: true }}
             transition={{ duration: 0.6, ease: 'easeOut' }}
           >
             We transform properties into high-performing investments.
           </motion.h2>
         ) : (
-          <h2 ref={headlineRef} className="font-serif text-2xl md:text-4xl lg:text-5xl max-w-5xl text-center md:text-left my-0">
+          <h2
+            ref={headlineRef}
+            className="my-0 max-w-5xl text-center font-serif text-2xl md:text-left md:text-4xl lg:text-5xl"
+          >
             We transform properties into high-performing investments.
           </h2>
         )}
-        {/* Mobile-only: render child content (Wellington card) directly under headline */}
       </div>
     </section>
   );
 }
-
-
