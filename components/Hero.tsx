@@ -74,27 +74,27 @@ export function Hero({ onScrollToProjects, onScrollToContact }: HeroProps) {
       {/* Removed extra bottom fade; container below uses solid background */}
 
       {/* Hero content */}
-      <div className="relative h-full container-edge flex flex-col items-start justify-center gap-6">
+      <div className="relative h-full container-edge flex flex-col items-start justify-center gap-6 overflow-x-clip">
         <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          initial={prefersReduced ? { opacity: 0 } : { opacity: 0, x: -56 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: prefersReduced ? 0.35 : 0.85, ease: [0.22, 1, 0.36, 1] }}
           className="font-serif text-4xl md:text-6xl lg:text-7xl max-w-4xl"
         >
           We Don’t Build Properties. We Build Assets.
         </motion.h1>
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.1 }}
+          initial={prefersReduced ? { opacity: 0 } : { opacity: 0, x: 48 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: prefersReduced ? 0.35 : 0.85, delay: prefersReduced ? 0 : 0.12, ease: [0.22, 1, 0.36, 1] }}
           className="text-base md:text-lg text-white/80"
         >
           Florida Investment-Driven General Contracting.
         </motion.p>
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={prefersReduced ? { opacity: 0 } : { opacity: 0, y: 36 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          transition={{ duration: prefersReduced ? 0.35 : 0.8, delay: prefersReduced ? 0 : 0.24, ease: [0.22, 1, 0.36, 1] }}
           className="flex flex-wrap gap-4"
         >
           <button
