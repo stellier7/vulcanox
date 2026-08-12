@@ -11,11 +11,17 @@ export function TestimonialCarousel() {
     let mounted = true;
     async function loop() {
       while (mounted) {
-        await controls.start({ x: [-8, 8, -8], transition: { duration: 8, repeat: 0, ease: 'easeInOut' } });
+        // Keep motion subtle and inside the image frame only
+        await controls.start({
+          scale: [1, 1.02, 1],
+          transition: { duration: 8, ease: 'easeInOut' }
+        });
       }
     }
     loop();
-    return () => { mounted = false; };
+    return () => {
+      mounted = false;
+    };
   }, [controls]);
 
   return (

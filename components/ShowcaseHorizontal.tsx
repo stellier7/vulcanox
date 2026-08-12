@@ -20,7 +20,7 @@ const projects: Project[] = [
 
 export function ShowcaseHorizontal() {
   return (
-    <section className="w-full bg-charcoal overflow-x-hidden">
+    <section className="w-full overflow-x-clip bg-charcoal">
       <div className="container-edge py-0">
         <div className="flex justify-center">
           {projects.map((p) => (

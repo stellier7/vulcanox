@@ -45,7 +45,7 @@ export function Hero({ onScrollToProjects, onScrollToContact }: HeroProps) {
   }, [isVideo]);
 
   return (
-    <section className="relative h-[100svh] w-full overflow-x-hidden">
+    <section className="relative h-[100svh] w-full overflow-x-clip">
       {/* Fixed background layer */}
       {isVideo ? (
         <video

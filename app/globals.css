@@ -7,16 +7,17 @@
   --fg: 255 255 255;
 }
 
-html, body {
+html {
   height: 100%;
-  overflow-x: hidden;
-  max-width: 100%;
 }
 
 body {
+  min-height: 100%;
   background-color: var(--bg);
   color: rgb(var(--fg));
-  position: relative;
+  /* clip avoids the overflow-x/overflow-y coupling that breaks page scroll */
+  overflow-x: clip;
+  max-width: 100%;
 }
 
 .container-edge {
@@ -31,5 +32,3 @@ body {
     scroll-behavior: auto !important;
   }
 }
-
-

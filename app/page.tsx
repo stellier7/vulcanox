@@ -27,15 +27,14 @@ export default function HomePage() {
   };
 
   return (
-    <main className="min-h-screen overflow-x-hidden">
+    <main className="min-h-screen overflow-x-clip">
       <Hero
         onScrollToProjects={() => scrollTo(projectsRef)}
         onScrollToContact={() => scrollTo(contactRef)}
       />
 
       {/* Content wrapper above the video; solid bg prevents any bleed-through */}
-      <div className="relative z-10 overflow-x-hidden bg-charcoal">
-        {/* Signature headline, then project card — stacked cleanly, no overlap */}
+      <div className="relative z-10 overflow-x-clip bg-charcoal">
         <SignatureSlide onReveal={() => setRevealCard(true)} onHide={() => setRevealCard(false)} />
 
         <ShowcaseFade reveal={revealCard} containerRef={projectsRef} />
