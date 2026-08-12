@@ -40,7 +40,7 @@ export function SignatureSlide({ onReveal, onHide }: Props) {
 
   return (
     <section ref={sectionRef} className="relative w-full overflow-x-clip bg-charcoal">
-      <div className="container-edge flex items-center justify-center py-16 md:py-24">
+      <div className="container-edge flex min-h-[42svh] items-start justify-center pt-16 pb-28 md:min-h-0 md:items-center md:py-24">
         <motion.h2
           className="my-0 max-w-4xl text-center font-serif text-2xl md:text-4xl lg:text-5xl"
           initial={{ opacity: 0, y: 20 }}
