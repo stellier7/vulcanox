@@ -39,7 +39,13 @@ export function TestimonialCarousel() {
           animate={controls}
           className="relative h-[40vh] w-full max-w-full overflow-hidden rounded-2xl border border-white/10 bg-white/5"
         >
-          <Image src="/images/normaSuarez.png" alt="Norma Suarez property" fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover" />
+          <Image
+            src="/images/normaSuarez.png"
+            alt="Norma Suarez"
+            fill
+            sizes="(max-width: 768px) 100vw, 33vw"
+            className="object-cover"
+          />
         </motion.div>
       </div>
     </section>

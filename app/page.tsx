@@ -2,25 +2,17 @@
 
 import { useRef, useState } from 'react';
 import { Hero } from '@/components/Hero';
-import { ShowcaseHorizontal } from '@/components/ShowcaseHorizontal';
-import { AboutJack } from '@/components/AboutJack';
 import { ProcessTimeline } from '@/components/ProcessTimeline';
 import { TestimonialCarousel } from '@/components/TestimonialCarousel';
 import { ContactForm } from '@/components/ContactForm';
 import { SignatureSlide } from '@/components/SignatureSlide';
 import { ShowcaseFade } from '@/components/ShowcaseFade';
 import { AboutScroller } from '@/components/AboutScroller';
-// SignatureLift/ShowcaseReveal not used in unified flow
-// Removed animated About intro to disable slide animation
 
 export default function HomePage() {
-  console.log('[VULCANOX] HomePage rendering');
-  
   const projectsRef = useRef<HTMLDivElement | null>(null);
   const [revealCard, setRevealCard] = useState(false);
   const contactRef = useRef<HTMLDivElement | null>(null);
-
-  // Reveal is controlled exclusively by SignatureSlide (liftStart) to avoid early appearance on mobile
 
   const scrollTo = (ref: React.RefObject<HTMLDivElement | null>) => {
     if (ref.current) ref.current.scrollIntoView({ behavior: 'smooth' });
@@ -39,7 +31,6 @@ export default function HomePage() {
 
         <ShowcaseFade reveal={revealCard} containerRef={projectsRef} />
 
-        {/* About section: image + headline + text scrolling in as a unit */}
         <AboutScroller />
 
         <ProcessTimeline />
@@ -48,9 +39,9 @@ export default function HomePage() {
 
         <section ref={contactRef} className="bg-charcoal">
           <div className="container-edge py-24">
-            <h2 className="font-serif text-3xl md:text-5xl text-center">Contact</h2>
-            <p className="text-white/70 mt-3 text-center">First & last name, email, phone, message.</p>
-            <div className="mt-6 max-w-2xl mx-auto">
+            <h2 className="text-center font-serif text-3xl md:text-5xl">Contact</h2>
+            <p className="mt-3 text-center text-white/70">First & last name, email, phone, message.</p>
+            <div className="mx-auto mt-6 max-w-2xl">
               <ContactForm />
             </div>
           </div>
@@ -59,5 +50,3 @@ export default function HomePage() {
     </main>
   );
 }
-
-

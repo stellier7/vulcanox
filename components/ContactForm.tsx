@@ -43,7 +43,8 @@ export function ContactForm() {
         fieldErrors[key] = err.message;
       }
       setErrors(fieldErrors);
-      setStatus('error');
+      // Validation failures are not server errors — keep status idle
+      setStatus('idle');
       return;
     }
     try {
@@ -52,16 +53,19 @@ export function ContactForm() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(parsed.data)
       });
-      if (!res.ok) throw new Error('Failed');
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data?.error || 'Failed');
+      // Treat "accepted but not delivered" as an error so we don't fake success
+      if (data?.delivered === false) throw new Error(data?.message || 'Delivery unavailable');
       setStatus('success');
       setValues({ firstName: '', lastName: '', email: '', phone: '', message: '', company: '' });
-    } catch (e) {
+    } catch {
       setStatus('error');
     }
   };
 
   return (
-    <form onSubmit={onSubmit} className="space-y-4">
+    <form onSubmit={onSubmit} className="space-y-4" noValidate>
       {/* Honeypot */}
       <input
         type="text"
@@ -71,80 +75,103 @@ export function ContactForm() {
         className="hidden"
         tabIndex={-1}
         autoComplete="off"
+        aria-hidden="true"
       />
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
         <div>
-          <label className="block text-sm text-white/70">First name</label>
+          <label htmlFor="contact-firstName" className="block text-sm text-white/70">
+            First name
+          </label>
           <input
-            className="mt-1 w-full rounded-md bg-white/5 border border-white/10 px-3 py-2 outline-none focus:border-bronze"
+            id="contact-firstName"
+            className="mt-1 w-full rounded-md border border-white/10 bg-white/5 px-3 py-2 outline-none focus:border-bronze"
             name="firstName"
             value={values.firstName}
             onChange={onChange}
             placeholder="Jack"
+            autoComplete="given-name"
           />
-          {errors.firstName && <p className="text-sm text-red-400 mt-1">{errors.firstName}</p>}
+          {errors.firstName && <p className="mt-1 text-sm text-red-400">{errors.firstName}</p>}
         </div>
         <div>
-          <label className="block text-sm text-white/70">Last name</label>
+          <label htmlFor="contact-lastName" className="block text-sm text-white/70">
+            Last name
+          </label>
           <input
-            className="mt-1 w-full rounded-md bg-white/5 border border-white/10 px-3 py-2 outline-none focus:border-bronze"
+            id="contact-lastName"
+            className="mt-1 w-full rounded-md border border-white/10 bg-white/5 px-3 py-2 outline-none focus:border-bronze"
             name="lastName"
             value={values.lastName}
             onChange={onChange}
             placeholder="Agurcia"
+            autoComplete="family-name"
           />
-          {errors.lastName && <p className="text-sm text-red-400 mt-1">{errors.lastName}</p>}
+          {errors.lastName && <p className="mt-1 text-sm text-red-400">{errors.lastName}</p>}
         </div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
         <div>
-          <label className="block text-sm text-white/70">Email</label>
+          <label htmlFor="contact-email" className="block text-sm text-white/70">
+            Email
+          </label>
           <input
-            className="mt-1 w-full rounded-md bg-white/5 border border-white/10 px-3 py-2 outline-none focus:border-bronze"
+            id="contact-email"
+            className="mt-1 w-full rounded-md border border-white/10 bg-white/5 px-3 py-2 outline-none focus:border-bronze"
             name="email"
             type="email"
             value={values.email}
             onChange={onChange}
             placeholder="you@company.com"
+            autoComplete="email"
           />
-          {errors.email && <p className="text-sm text-red-400 mt-1">{errors.email}</p>}
+          {errors.email && <p className="mt-1 text-sm text-red-400">{errors.email}</p>}
         </div>
         <div>
-          <label className="block text-sm text-white/70">Phone</label>
+          <label htmlFor="contact-phone" className="block text-sm text-white/70">
+            Phone
+          </label>
           <input
-            className="mt-1 w-full rounded-md bg-white/5 border border-white/10 px-3 py-2 outline-none focus:border-bronze"
+            id="contact-phone"
+            className="mt-1 w-full rounded-md border border-white/10 bg-white/5 px-3 py-2 outline-none focus:border-bronze"
             name="phone"
+            type="tel"
             value={values.phone}
             onChange={onChange}
             placeholder="+1 555 123 4567"
+            autoComplete="tel"
           />
-          {errors.phone && <p className="text-sm text-red-400 mt-1">{errors.phone}</p>}
+          {errors.phone && <p className="mt-1 text-sm text-red-400">{errors.phone}</p>}
         </div>
       </div>
       <div>
-        <label className="block text-sm text-white/70">Message</label>
+        <label htmlFor="contact-message" className="block text-sm text-white/70">
+          Message
+        </label>
         <textarea
-          className="mt-1 w-full rounded-md bg-white/5 border border-white/10 px-3 py-2 outline-none focus:border-bronze min-h-[140px]"
+          id="contact-message"
+          className="mt-1 min-h-[140px] w-full rounded-md border border-white/10 bg-white/5 px-3 py-2 outline-none focus:border-bronze"
           name="message"
           value={values.message}
           onChange={onChange}
           placeholder="Tell us about your property or project..."
         />
-        {errors.message && <p className="text-sm text-red-400 mt-1">{errors.message}</p>}
+        {errors.message && <p className="mt-1 text-sm text-red-400">{errors.message}</p>}
       </div>
-      <div className="flex items-center gap-4">
+      <div className="flex flex-wrap items-center gap-4">
         <button
           type="submit"
           disabled={status === 'submitting'}
-          className="rounded-full bg-bronze px-6 py-3 text-sm font-medium text-black hover:brightness-110 transition disabled:opacity-60"
+          className="rounded-full bg-bronze px-6 py-3 text-sm font-medium text-black transition hover:brightness-110 disabled:opacity-60"
         >
           {status === 'submitting' ? 'Sending…' : 'Send Message'}
         </button>
-        {status === 'success' && <span className="text-green-400">Thanks — we will reach out shortly.</span>}
-        {status === 'error' && <span className="text-red-400">Something went wrong. Try again.</span>}
+        {status === 'success' && (
+          <span className="text-green-400">Thanks — we will reach out shortly.</span>
+        )}
+        {status === 'error' && (
+          <span className="text-red-400">Something went wrong. Try again.</span>
+        )}
       </div>
     </form>
   );
 }
-
-

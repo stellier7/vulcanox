@@ -21,19 +21,19 @@ export function ProcessTimeline() {
     if (!el) return;
     const cards = el.querySelectorAll('.proc-step');
     const ctx = gsap.context(() => {
-      cards.forEach((card, idx) => {
+      cards.forEach((card) => {
         gsap.fromTo(
           card,
-          { opacity: 0, y: 24 },
+          { opacity: 0, y: 20 },
           {
             opacity: 1,
             y: 0,
-            ease: 'none',
+            duration: 0.55,
+            ease: 'power2.out',
             scrollTrigger: {
               trigger: card as Element,
-              start: 'top 90%',
-              end: 'top 60%',
-              scrub: 1.2 // slower and reversible
+              start: 'top 88%',
+              toggleActions: 'play none none reverse'
             }
           }
         );
@@ -45,10 +45,14 @@ export function ProcessTimeline() {
   return (
     <section className="bg-charcoal" ref={sectionRef}>
       <div className="container-edge py-24">
-        <h3 className="font-serif text-3xl md:text-5xl mb-10">Investment Process</h3>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <h3 className="mb-10 font-serif text-3xl md:text-5xl">Investment Process</h3>
+        {/* 1 → 2 → 4 columns: avoid cramped 4-up on tablet */}
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
           {steps.map((s, i) => (
-            <div key={s.title} className="proc-step rounded-xl border border-white/10 bg-white/5 p-6 will-change-transform">
+            <div
+              key={s.title}
+              className="proc-step rounded-xl border border-white/10 bg-white/5 p-6 will-change-transform"
+            >
               <div className="text-sm uppercase tracking-wide text-white/60">Step {i + 1}</div>
               <div className="mt-2 font-serif text-2xl">{s.title}</div>
               <p className="mt-3 text-white/80">{s.desc}</p>
@@ -59,5 +63,3 @@ export function ProcessTimeline() {
     </section>
   );
 }
-
-

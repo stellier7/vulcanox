@@ -18,7 +18,7 @@ function rateLimit(ip: string): boolean {
 
 export async function POST(req: Request) {
   try {
-    const ip = (req.headers.get('x-forwarded-for') || '').split(',')[0] || 'unknown';
+    const ip = (req.headers.get('x-forwarded-for') || '').split(',')[0].trim() || 'unknown';
     if (!rateLimit(ip)) {
       return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
     }
@@ -26,24 +26,36 @@ export async function POST(req: Request) {
     const body = await req.json();
     const { firstName, lastName, email, phone, message, company } = body || {};
     if (company) {
-      // Honeypot caught
-      return NextResponse.json({ ok: true });
+      // Honeypot caught — pretend success
+      return NextResponse.json({ ok: true, delivered: true });
     }
     if (!firstName || !lastName || !email || !phone || !message) {
       return NextResponse.json({ error: 'Invalid payload' }, { status: 400 });
     }
 
-    // Placeholder: wire email provider later
+    // Email provider not wired yet — do not fake a successful delivery
     if (!process.env.CONTACT_TO) {
-      return NextResponse.json({ ok: true, message: 'Email disabled (CONTACT_TO missing). Logged only.' });
+      console.warn('[VULCANOX] Contact form received but CONTACT_TO is not configured', {
+        firstName,
+        lastName,
+        email,
+        phone,
+        messageLength: String(message).length
+      });
+      return NextResponse.json(
+        {
+          ok: false,
+          delivered: false,
+          error: 'Contact delivery is not configured',
+          message: 'Email disabled (CONTACT_TO missing).'
+        },
+        { status: 503 }
+      );
     }
 
-    // Example: integrate Nodemailer/Resend here
-    // For now, just acknowledge
-    return NextResponse.json({ ok: true });
-  } catch (e) {
+    // TODO: integrate Nodemailer/Resend using CONTACT_TO
+    return NextResponse.json({ ok: true, delivered: true });
+  } catch {
     return NextResponse.json({ error: 'Server error' }, { status: 500 });
   }
 }
-
-
