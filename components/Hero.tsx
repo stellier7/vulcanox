@@ -79,9 +79,10 @@ export function Hero({ onScrollToProjects, onScrollToContact }: HeroProps) {
           initial={prefersReduced ? { opacity: 0 } : { opacity: 0, x: -56 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: prefersReduced ? 0.35 : 0.85, ease: [0.22, 1, 0.36, 1] }}
-          className="font-serif text-4xl md:text-6xl lg:text-7xl max-w-4xl"
+          className="font-serif text-3xl md:text-5xl lg:text-6xl max-w-4xl leading-tight"
         >
-          We Don’t Build Properties. We Build Assets.
+          <span className="block">We Don’t Build Properties.</span>
+          <span className="block">We Build Assets.</span>
         </motion.h1>
         <motion.p
           initial={prefersReduced ? { opacity: 0 } : { opacity: 0, x: 48 }}
