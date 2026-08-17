@@ -27,9 +27,11 @@ export default function HomePage() {
 
       {/* Content wrapper above the video; solid bg prevents any bleed-through */}
       <div className="relative z-10 overflow-x-clip bg-charcoal">
-        <SignatureSlide onReveal={() => setRevealCard(true)} onHide={() => setRevealCard(false)} />
+        <div className="max-md:flex max-md:flex-col max-md:gap-2 md:contents">
+          <SignatureSlide onReveal={() => setRevealCard(true)} onHide={() => setRevealCard(false)} />
 
-        <ShowcaseFade reveal={revealCard} containerRef={projectsRef} />
+          <ShowcaseFade reveal={revealCard} containerRef={projectsRef} />
+        </div>
 
         <AboutScroller />
 

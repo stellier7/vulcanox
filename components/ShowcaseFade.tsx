@@ -9,12 +9,12 @@ export function ShowcaseFade({ reveal, containerRef }: Props) {
   return (
     <motion.div
       ref={containerRef}
-      className="overflow-x-clip pb-16 pt-0 md:pb-24 md:-mt-1"
-      initial={{ opacity: 0, y: 28 }}
-      animate={reveal ? { opacity: 1, y: 0 } : undefined}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ amount: 0.25, once: true }}
-      transition={{ duration: 0.7, ease: 'easeOut' }}
+      className={`overflow-x-clip pb-16 pt-0 md:pb-24 md:-mt-1 ${
+        reveal ? '' : 'max-md:h-0 max-md:overflow-hidden max-md:pb-0 max-md:opacity-0'
+      }`}
+      initial={false}
+      animate={reveal ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
+      transition={{ duration: 0.55, ease: 'easeOut' }}
     >
       <ShowcaseHorizontal />
     </motion.div>

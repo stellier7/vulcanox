@@ -64,8 +64,8 @@ export function SignatureSlide({ onReveal, onHide }: Props) {
             ease: 'power2.out',
             scrollTrigger: {
               trigger: el,
-              start: 'top 92%',
-              end: 'top 58%',
+              start: 'top 98%',
+              end: 'top 86%',
               scrub: true
             }
           }
@@ -73,7 +73,7 @@ export function SignatureSlide({ onReveal, onHide }: Props) {
 
         ScrollTrigger.create({
           trigger: el,
-          start: 'top 62%',
+          start: 'top 96%',
           end: 'bottom top',
           onEnter: () => onRevealRef.current?.(),
           onEnterBack: () => onRevealRef.current?.(),
@@ -89,11 +89,11 @@ export function SignatureSlide({ onReveal, onHide }: Props) {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative w-full overflow-x-clip bg-charcoal">
-      <div className="container-edge flex items-center justify-center pt-12 pb-4 md:pt-16 md:pb-6">
+    <section ref={sectionRef} className="relative w-full overflow-x-clip bg-charcoal max-md:min-h-0">
+      <div className="container-edge flex items-start justify-center pt-4 pb-0 md:items-center md:pt-16 md:pb-6">
         <h2
           ref={headlineRef}
-          className="my-0 max-w-4xl text-center font-serif text-2xl md:text-4xl lg:text-5xl"
+          className="my-0 max-w-4xl text-center font-serif text-2xl leading-snug md:text-4xl md:leading-tight lg:text-5xl"
         >
           We transform properties into high-performing investments.
         </h2>
