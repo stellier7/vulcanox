@@ -79,15 +79,18 @@ export function Hero({ onScrollToProjects, onScrollToContact }: HeroProps) {
           initial={prefersReduced ? { opacity: 0 } : { opacity: 0, x: -56 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: prefersReduced ? 0.35 : 0.85, ease: [0.22, 1, 0.36, 1] }}
-          className="font-serif text-4xl md:text-6xl lg:text-7xl max-w-4xl"
+          className="font-serif text-3xl md:text-5xl lg:text-6xl max-w-4xl leading-[1.06] tracking-[-0.01em]"
         >
-          We Don’t Build Properties. We Build Assets.
+          <span className="block font-light text-white/78">We Don’t Build Properties.</span>
+          <span className="mt-1 block font-normal text-white md:mt-2">
+            We Build <span className="text-bronze">Assets.</span>
+          </span>
         </motion.h1>
         <motion.p
           initial={prefersReduced ? { opacity: 0 } : { opacity: 0, x: 48 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: prefersReduced ? 0.35 : 0.85, delay: prefersReduced ? 0 : 0.12, ease: [0.22, 1, 0.36, 1] }}
-          className="text-base md:text-lg text-white/80"
+          className="max-w-xl text-xs uppercase tracking-[0.24em] text-white/55 md:text-sm md:tracking-[0.28em]"
         >
           Florida Investment-Driven General Contracting.
         </motion.p>
