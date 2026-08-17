@@ -12,7 +12,10 @@ export function Header() {
           aria-label="Vulcanox home"
         >
           <span className="font-serif text-[0.72rem] font-normal uppercase tracking-[0.38em] text-white/90 md:text-[0.8rem] md:tracking-[0.42em] pl-[0.38em] md:pl-[0.42em]">
-            Vulcanox
+            Vulcano
+            <span className="text-bronze [-webkit-text-stroke:0.6px_rgba(255,255,255,0.88)] [paint-order:stroke_fill]">
+              x
+            </span>
           </span>
           <span
             className="h-px w-12 bg-gradient-to-r from-bronze/90 via-bronze/45 to-transparent transition-[width] duration-500 group-hover:w-16 md:w-14 md:group-hover:w-[4.25rem]"

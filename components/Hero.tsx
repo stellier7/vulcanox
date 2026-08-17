@@ -82,8 +82,8 @@ export function Hero({ onScrollToProjects, onScrollToContact }: HeroProps) {
           className="font-serif text-3xl md:text-5xl lg:text-6xl max-w-4xl leading-[1.06] tracking-[-0.01em]"
         >
           <span className="block font-light text-white/78">We Don’t Build Properties.</span>
-          <span className="mt-1 block italic text-white md:mt-2">
-            We Build <span className="not-italic text-bronze">Assets.</span>
+          <span className="mt-1 block font-normal text-white md:mt-2">
+            We Build <span className="text-bronze">Assets.</span>
           </span>
         </motion.h1>
         <motion.p
