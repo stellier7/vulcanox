@@ -9,7 +9,7 @@ export function Footer() {
         </div>
         <div className="foot-credit">
           Developed by{' '}
-          <a href="https://iagodigital.vercel.app" target="_blank" rel="noopener">
+          <a href="https://www.iagodigital.com/" target="_blank" rel="noopener">
             IAGO Digital
           </a>
         </div>
